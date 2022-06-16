@@ -1,0 +1,15 @@
+.element__like_active {
+    display: flex;
+    align-self: center;  
+    min-width: 22px;
+    min-height: 19px;
+    padding: 0;
+    border: 0;
+    background-color: white;
+    background-image: url(../../../../img/Union.svg);
+}
+
+.element__like_active:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
