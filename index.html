@@ -1,90 +1,80 @@
 <!DOCTYPE html>
 <html lang="ru">
- <head>
-  <title>Место</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
- </head>
+  <head>
+    <title>Место</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
 
- <body class="container">
-  <header class="header">
-   <img class="header__logo" src="./img/Vector.svg" alt="логотип">
-  </header>
+  <body class="container">
+    <header class="header">
+      <img class="header__logo" src="./img/Vector.svg" alt="логотип" />
+    </header>
 
-  <main>
-   <section class="profile">
-    <img class="profile__avatar" src="./img/image.jpg" alt="Жак-Ив Кусто">
-    <div class="profile__content">
-     <h1 class="profile__name" id="name">Жак-Ив Кусто</h1>
-     <button class="profile__edit-button" type="button"></button>
-     <p class="profile__description" id="description">Исследователь океана</p>
+    <main>
+      <section class="profile">
+        <img class="profile__avatar" src="./img/image.jpg" alt="Жак-Ив Кусто" />
+        <div class="profile__content">
+          <h1 class="profile__name" id="name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button" type="button"></button>
+          <p class="profile__description" id="description">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+
+      <section>
+        <ul class="elements"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+
+    <div class="popup popup-add">
+      <div class="popup__body">
+        <button class="popup__exit" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup__form_type_add" name="add-form" method="post">
+          <input class="popup__text popup__text_type_title" placeholder="Название" name="title" type="text" />
+          <input class="popup__text popup__text_type_sorce" placeholder="Ссылка на картинку" name="source" type="url" />
+          <button class="popup__button" type="submit">Создать</button>
+        </form>
+      </div>
     </div>
-    <button class="profile__add-button" type="button"></button>
-   </section>
 
-   <section>
-    <ul class="elements">
-     <li class="element">
-      <img class="element__image" src="./img/kirill-pershin-1556355-unsplash.jpg" alt="природа">
-      <div class="element__content">
-       <h2 class="element__title">Карачаевск</h2>
-       <button class="element__like" type="button"></button>
+    <div class="popup popup-edit">
+      <div class="popup__body">
+        <button class="popup__exit" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form popup__form_type_edit" name="edit-form" method="post">
+          <input class="popup__text popup__text_type_name" placeholder="Имя" name="name" type="text" />
+          <input class="popup__text popup__text_type_description" placeholder="Описание" name="description" type="text" />
+          <button class="popup__button" type="submit">Сохранить</button>
+        </form>
       </div>
-     </li>
-     <li class="element">
-      <img class="element__image" src="./img/kirill-pershin-1404681-unsplash.jpg" alt="природа">
-      <div class="element__content">
-       <h2 class="element__title">Гора Эльбрус</h2>
-       <button class="element__like" type="button"></button>
-      </div>
-     </li>
-     <li class="element">
-      <img class="element__image" src="./img/kirill-pershin-1088404-unsplash.jpg" alt="природа">
-      <div class="element__content">
-       <h2 class="element__title">Домбай</h2>
-       <button class="element__like" type="button"></button>
-      </div>
-     </li>
-     <li class="element">
-      <img class="element__image" src="./img/kirill-pershin-1404681-unsplash.jpg" alt="природа">
-      <div class="element__content">
-       <h2 class="element__title">Гора Эльбрус</h2>
-       <button class="element__like" type="button"></button>
-      </div>
-     </li>
-     <li class="element">
-      <img class="element__image" src="./img/kirill-pershin-1088404-unsplash.jpg" alt="природа">
-      <div class="element__content">
-       <h2 class="element__title">Домбай</h2>
-       <button class="element__like" type="button"></button>
-      </div>
-     </li>
-     <li class="element">
-      <img class="element__image" src="./img/kirill-pershin-1556355-unsplash.jpg" alt="природа">
-      <div class="element__content">
-       <h2 class="element__title">Карачаевск</h2>
-       <button class="element__like" type="button"></button>
-      </div>
-     </li>
-    </ul>
-   </section>
-  </main>
-
-  <footer class="footer">
-   <p class="footer__copyright">© 2020 Mesto Russia</p>
-  </footer>
-  <div class="popup">
-    <div class="popup__body">
-     <button class="popup__exit" type="button"></button>
-     <h2 class="popup__title">Редактировать профиль</h2>
-     <form class="popup__form" name="myForm" method="post">
-      <input class="popup__text popup__text_type_name" placeholder="Имя" name="name">
-      <input class="popup__text popup__text_type_description" placeholder="Описание" name="description">
-      <button class="popup__button" type="submit">Сохранить</button>
-     </form>
     </div>
-   </div>
-  <script src="./scripts/script.js"></script>
- </body>
+
+    <template class="element-template">
+      <li class="element">
+        <img class="element__image" src="" alt="" id="source" />
+        <img class="element__delete" src="./img/delete.svg" alt="кнопка удаления" />
+        <div class="element__content">
+          <h2 class="element__title" id="title"></h2>
+          <button class="element__like" type="button"></button>
+        </div>
+      </li>
+    </template>
+
+    <div class="popup popup-image">
+      <div class="popup__body_type-image">
+        <button class="popup__exit" type="button"></button>
+        <img class="popup__image" src="" alt="природа" />
+        <p class="popup__description"></p>
+      </div>
+    </div>
+
+    <script src="./scripts/script.js"></script>
+  </body>
 </html>
