@@ -1,0 +1,16 @@
+.element__like {
+  display: flex;
+  align-self: center;
+  min-width: 22px;
+  min-height: 19px;
+  padding: 0;
+  border: 0;
+  margin-right: 30px;
+  background-color: white;
+  background-image: url(../../../img/Vector-3.svg);
+}
+
+.element__like:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
