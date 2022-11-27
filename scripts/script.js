@@ -1,6 +1,6 @@
+import  {Card} from "./Card.js";
+import {FormValidation} from "./validate.js";
 const popupEditOpen = document.querySelector(".profile__edit-button");
-const popupListClose = document.querySelectorAll(".popup__exit");
-const popupList = document.querySelectorAll(".popup");
 const name = document.getElementById("name");
 const description = document.getElementById("description");
 const cardForm = document.querySelector(".popup__form_type_add");
@@ -9,15 +9,14 @@ const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
 const popupCardOpen = document.querySelector(".profile__add-button");
 const elementPageItem = document.querySelector(".elements");
-const elementTemplate = document.querySelector(".element-template").content;
-const title = elementTemplate.querySelector("#title");
-const source = elementTemplate.querySelector("#source");
+const elementTemplate = document.querySelector(".element-template");
 const cardPopup = document.querySelector(".popup-add");
 const editPopup = document.querySelector(".popup-edit");
-const imagePopup = document.querySelector(".popup-image");
 const nameTitle = document.querySelector(".popup__input_type_title");
-const linkSource = document.querySelector(".popup__input_type_sorce");
-const bodyPopup = document.querySelector('.popup__body');
+const linkSource = document.querySelector(".popup__input_type_source");
+const linkPopupImg = document.querySelector(".popup__image");
+const titlePopupImg = document.querySelector(".popup__description");
+const imagePopup = document.querySelector(".popup-image");
 const initialCards = [
   {
     name: "Архыз",
@@ -44,60 +43,41 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-const linkPopupImg = document.querySelector(".popup__image");
-const titlePopupImg = document.querySelector(".popup__description");
 
-// удаление карточки
-function handleDelete(btn) {
-  btn.target.closest(".element").remove();
-}
-function handleLike(buttonLike) {
-  buttonLike.classList.toggle("element__like_active");
-}
+const components = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
-// добаление карточки из массива
-function createCard(card) {
-  const elementCard = elementTemplate.cloneNode(true);
-  elementCard.querySelector(".element__title").textContent = card.name;
-  const placeImg = elementCard.querySelector(".element__image");
-  placeImg.src = card.link;
-  placeImg.alt = card.name;
-  setEventListener(elementCard);
-  renderCard(elementCard);
-  return;
-}
 
-function renderCard(elementCard) {
-  elementPageItem.prepend(elementCard);
-}
 
-initialCards.forEach(createCard);
+function openPopup(modalWindow) {
+  modalWindow.classList.add("popup_modal_is-opened");
+  document.addEventListener('keydown', closeByEsc);
+  modalWindow.addEventListener('click', closeByClick);
+};
 
-// слушатели для карточек
-function setEventListener(elementCard) {
-  const deleteButton = elementCard.querySelector(".element__delete");
-  deleteButton.addEventListener("click", handleDelete);
-  const likeButton = elementCard.querySelector(".element__like");
-  likeButton.addEventListener("click", () => handleLike(likeButton));
-  const popupImage = elementCard.querySelector(".element__image");
-  popupImage.addEventListener("click", handleImg);
-}
+function handleImagePopup() {
+  openPopup(imagePopup);
+};
 
-function handleImg(evt) {
-  const titleImg = evt.target.closest(".element").querySelector(".element__title").textContent;
-  const linkImg = evt.target.closest(".element").querySelector(".element__image").src;
-  titlePopupImg.textContent = titleImg;
-  linkPopupImg.setAttribute("src", linkImg);
-  linkPopupImg.setAttribute("alt", titleImg);
+function handleCardClick(name, link) {
+  titlePopupImg.textContent = name;
+  linkPopupImg.setAttribute("src", link);
+  linkPopupImg.setAttribute("alt", name);
   handleImagePopup();
-}
+};
 
 function editFormHandler(evt) {
   evt.preventDefault();
   closePopup(editPopup);
   name.textContent = nameInput.value;
   description.textContent = jobInput.value;
-}
+};
 
 function cardFormHandler(evt) {
   evt.preventDefault();
@@ -105,7 +85,7 @@ function cardFormHandler(evt) {
   const cardInput = { name: nameTitle.value, link: linkSource.value };
   createCard(cardInput);
   cardForm.reset();
-}
+};
 
 cardForm.addEventListener("submit", cardFormHandler);
 editForm.addEventListener("submit", editFormHandler);
@@ -130,34 +110,49 @@ function closeByEsc(evt) {
       const openedPopup = document.querySelector(".popup_modal_is-opened");
       closePopup(openedPopup);
     }
-}
+};
 
 function closePopup(modalWindow) {
   modalWindow.classList.remove('popup_modal_is-opened');
   document.removeEventListener('keydown', closeByEsc);
   modalWindow.removeEventListener('click', closeByClick);
-}
+};
 
 //функция открытия попапов
 
-function openPopup(modalWindow) {
-  modalWindow.classList.add("popup_modal_is-opened");
-  document.addEventListener('keydown', closeByEsc);
-  modalWindow.addEventListener('click', closeByClick);
-}
-
-function handleImagePopup() {
-  openPopup(imagePopup);
-}
 
 function handleCardPopup() {
   openPopup(cardPopup);
-  resetError(cardPopup, components);
-}
+};
 
 function handleEditPopup() {
   openPopup(editPopup);
-  resetError(editPopup, components);
   nameInput.value = name.textContent;
   jobInput.value = description.textContent;
+};
+
+
+ initialCards.forEach((data) => {
+  createCard(data)
+}); 
+
+
+const Validation = (components) => {
+  const formList = Array.from(document.querySelectorAll(components.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidation(components, formElement);
+    validator.enableValidation();
+  });
+};
+
+function createCard(data){
+  // Создадим экземпляр карточки
+  const card = new Card(data, elementTemplate, handleCardClick);
+  // Создаём карточку и возвращаем наружу
+  const elementCard = card.getCard();
+
+  // Добавляем в DOM
+  elementPageItem.prepend(elementCard);
 }
+
+Validation(components)
