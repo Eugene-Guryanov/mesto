@@ -123,14 +123,14 @@ function closePopup(modalWindow) {
 
 function handleCardPopup() {
   openPopup(cardPopup);
-
+  runValidation(components)
 };
 
 function handleEditPopup() {
   nameInput.value = name.textContent;
   jobInput.value = description.textContent;
   openPopup(editPopup);
-
+  runValidation(components)
 };
 
 
@@ -145,6 +145,7 @@ const runValidation = (components) => {
   formList.forEach((formElement) => {
     const validator = new FormValidation(components, formElement);
     validator.enableValidation();
+    validator.resetError();
   });
 };
 
