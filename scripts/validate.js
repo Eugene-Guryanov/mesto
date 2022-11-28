@@ -56,14 +56,14 @@ _setEventListeners = () => {
   this._toggleButtonState();
 };
 
-enableValidation ()  {
+enableValidation = () =>  {
    this._setEventListeners();
-   this._resetError();
 };
 
 // очищаем ошибки валидации
-_resetError = () => {
+resetError = () => {
   this._inputList.forEach(inputElement => this._hideInputError(inputElement));
+  this._toggleButtonState();
 }
 
 _hasInvalidInput = () => {

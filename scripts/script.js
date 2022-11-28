@@ -74,20 +74,20 @@ function handleCardClick(name, link) {
 
 function editFormHandler(evt) {
   evt.preventDefault();
-  closePopup(editPopup);
   name.textContent = nameInput.value;
   description.textContent = jobInput.value;
+  closePopup(editPopup);
 };
 
-function cardFormHandler(evt) {
+function HandleCardForm(evt) {
   evt.preventDefault();
-  closePopup(cardPopup);
   const cardInput = { name: nameTitle.value, link: linkSource.value };
   createCard(cardInput);
+  closePopup(cardPopup);
   cardForm.reset();
 };
 
-cardForm.addEventListener("submit", cardFormHandler);
+cardForm.addEventListener("submit", HandleCardForm);
 editForm.addEventListener("submit", editFormHandler);
 
 //открытие попапа добавления карточки
@@ -123,12 +123,14 @@ function closePopup(modalWindow) {
 
 function handleCardPopup() {
   openPopup(cardPopup);
+
 };
 
 function handleEditPopup() {
-  openPopup(editPopup);
   nameInput.value = name.textContent;
   jobInput.value = description.textContent;
+  openPopup(editPopup);
+
 };
 
 
@@ -137,7 +139,8 @@ function handleEditPopup() {
 }); 
 
 
-const Validation = (components) => {
+
+const runValidation = (components) => {
   const formList = Array.from(document.querySelectorAll(components.formSelector));
   formList.forEach((formElement) => {
     const validator = new FormValidation(components, formElement);
@@ -155,4 +158,4 @@ function createCard(data){
   elementPageItem.prepend(elementCard);
 }
 
-Validation(components)
+runValidation(components)

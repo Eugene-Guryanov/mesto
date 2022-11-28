@@ -9,8 +9,7 @@ export class Card {
     }
 
     _getTemplate() {
-    const newCard = document
-    .querySelector('.element-template')
+    const newCard = this.elementTemplateSelector
     .content
     .querySelector('.element')
     .cloneNode(true);
@@ -19,10 +18,11 @@ export class Card {
 
     getCard() {
         this._newCard = this._getTemplate();
-        this._setEventListeners()
-        this._newCard.querySelector(".element__image").src = this.cardLink;
-        this._newCard.querySelector(".element__image").alt = this.cardName;
+        this._imageCard = this._newCard.querySelector(".element__image");
+        this._imageCard.src = this.cardLink;
+        this._imageCard.alt = this.cardName;
         this._newCard.querySelector(".element__title").textContent = this.cardName;
+        this._setEventListeners();
         return this._newCard;
     };
 
