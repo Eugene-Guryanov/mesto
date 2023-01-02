@@ -5,17 +5,17 @@
   <title>Место</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./pages/index.css" />
+
 </head>
 
 <body class="container">
   <header class="header">
-    <img class="header__logo" src="./img/Vector.svg" alt="логотип" />
+    <img class="header__logo" src="<%=require('./img/Vector.svg')%>" alt="логотип" />
   </header>
 
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="./img/image.jpg" alt="Жак-Ив Кусто" />
+      <img class="profile__avatar" src="<%=require('./img/image.jpg')%>" alt="Жак-Ив Кусто" />
       <div class="profile__content">
         <h1 class="profile__name" id="name">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button"></button>
@@ -76,7 +76,7 @@
   <template class="element-template">
     <li class="element">
       <img class="element__image" alt="" id="source" />
-      <img class="element__delete" src="./img/delete.svg" alt="кнопка удаления" />
+      <img class="element__delete" src="<%=require('./img/delete.svg')%>" alt="кнопка удаления" />
       <div class="element__content">
         <h2 class="element__title" id="title"></h2>
         <button class="element__like" type="button"></button>
@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <script src="./scripts/script.js" type="module"></script>
+ 
 </body>
 
 </html>

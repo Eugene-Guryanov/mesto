@@ -1,4 +1,4 @@
- export class FormValidation {
+ export default class FormValidation {
 
 constructor(components, formElement){
   this._inputSelector = components.inputSelector;

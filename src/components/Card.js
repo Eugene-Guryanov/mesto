@@ -1,15 +1,15 @@
 
-export class Card {
+export default class Card {
    
-    constructor(data, elementTemplateSelector, handleImagePopup){
-        this.cardName = data.name;
-        this.cardLink = data.link;
-        this.elementTemplateSelector = elementTemplateSelector;
-        this.handleImagePopup = handleImagePopup;
+    constructor({data, handleCardClick}, elementTemplateSelector){
+        this._cardName = data.name;
+        this._cardLink = data.link;
+        this._elementTemplateSelector = elementTemplateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
-    const newCard = this.elementTemplateSelector
+    const newCard = this._elementTemplateSelector
     .content
     .querySelector('.element')
     .cloneNode(true);
@@ -19,9 +19,9 @@ export class Card {
     getCard() {
         this._newCard = this._getTemplate();
         this._imageCard = this._newCard.querySelector(".element__image");
-        this._imageCard.src = this.cardLink;
-        this._imageCard.alt = this.cardName;
-        this._newCard.querySelector(".element__title").textContent = this.cardName;
+        this._imageCard.src = this._cardLink;
+        this._imageCard.alt = this._cardName;
+        this._newCard.querySelector(".element__title").textContent = this._cardName;
         this._setEventListeners();
         return this._newCard;
     };
@@ -35,7 +35,7 @@ export class Card {
           this._deleteCard();
       })
       this._newCard.querySelector(".element__image").addEventListener("click", () => {
-        this._handleClickImage();
+        this._handleCardClick(this.cardName, this.cardLink);
       });
     }
     
@@ -46,9 +46,5 @@ export class Card {
     _deleteCard() {
       const itemNewCard = this._newCard
       itemNewCard.remove();
-    }
-    
-    _handleClickImage(){
-        this.handleImagePopup(this.cardName, this.cardLink)
     }
 }
