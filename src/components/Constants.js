@@ -1,21 +1,27 @@
+// Элементы
 
 const popupEditOpen = document.querySelector(".profile__edit-button");
 const popupCardOpen = document.querySelector(".profile__add-button");
-const name = document.getElementById("name");
-const description = document.getElementById("description");
 const cardForm = document.querySelector(".popup__form_type_add");
 const editForm = document.querySelector(".popup__form_type_edit");
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
-const elementPageItem = document.querySelector(".elements");
-const elementTemplate = document.querySelector(".element-template");
-const cardPopup = document.querySelector(".popup-add");
-const editPopup = document.querySelector(".popup-edit")
 const nameTitle = document.querySelector(".popup__input_type_title");
 const linkSource = document.querySelector(".popup__input_type_source");
 const linkPopupImg = document.querySelector(".popup__image");
 const titlePopupImg = document.querySelector(".popup__description");
-const imagePopup = document.querySelector(".popup-image");
+const formValidators = {};
+
+// Селекторы
+
+const elementPageItem = ".elements";
+const elementTemplate = ".element-template";
+const cardPopup = ".popup-add";
+const editPopup = ".popup-edit";
+const imagePopup = ".popup-image";
+const name = ".profile__name";
+const description = ".profile__description";
+// Массивы
 
 const initialCards = [
   {
@@ -44,6 +50,8 @@ const initialCards = [
   },
 ];
 
+// Объекты 
+
 const components = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -52,8 +60,6 @@ const components = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
-
-const formValidators = {};
 
 
 export {

@@ -1,6 +1,6 @@
 import './index.css';
 import  Card from "../components/Card.js";
-import FormValidation from "../components/validate.js";
+import FormValidation from "../components/FormValidation.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
@@ -26,7 +26,7 @@ import {
   initialCards,
   components,
   formValidators,
-} from "../components/Constants.js";
+} from "../components/constants.js";
 
 
 const runValidation = (components) => {
@@ -34,7 +34,6 @@ const runValidation = (components) => {
   formList.forEach((formElement) => {
     const validator = new FormValidation(components, formElement);
     validator.enableValidation();
-    validator.resetError();
     const formName = formElement.getAttribute('name');
     formValidators[formName] = validator;
   });
@@ -52,17 +51,15 @@ const createCard = (data) => {
   },
   elementTemplate
 );
-const cardElement =  card.getCard();
-section.addItem(cardElement)
-
+return card.getCard()
 }
 
 
 const popupWithPicture = new PopupWithImage(imagePopup);
 
 
-const section = new Section ({ renderer: (data) => {
-   createCard(data);
+const section = new Section ({ renderer: (data) => { 
+  section.addItem(createCard(data)) 
   }
   },elementPageItem
 ) 
@@ -72,8 +69,9 @@ const userInfo = new UserInfo({
   description: description,
 });
 
-const popupProfileEdit = new PopupWithForm(editPopup, () => {
-  userInfo.setUserInfo(jobInput, nameInput);
+const popupProfileEdit = new PopupWithForm(editPopup, (data) => {
+const {name, description} = data;
+  userInfo.setUserInfo(name, description);
 });
 
 
@@ -86,7 +84,11 @@ popupEditOpen.addEventListener('click', () => {
 });
 
 const popupCardAdd = new PopupWithForm(cardPopup, (data) => {
-createCard(data);
+  const cardElement = createCard({
+    name: data['title'],
+    link: data['source']
+  });
+  section.addItem(cardElement) 
 });
 
 
