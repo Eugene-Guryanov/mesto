@@ -15,17 +15,11 @@ export default class Popup {
     // Приватный метод для закрытия попапа по клику на оверлей
   
     _handleOverlayClose(evt) {
-      if (evt.target.classList.contains('popup_modal_is-opened')) {
+      if (evt.target.classList.contains('popup_modal_is-opened') || evt.target.classList.contains('popup__exit')) {
         this.close();
       }
     }
-
-    _handleButtonkClose(evt){
-      if (evt.target.classList.contains('popup__exit')){
-        this.close();
-      }
-    }
-  
+   
     // Публичный метод для открытия попапа с добавлением обработчика событий по закрытию на кнопку ESC
   
     open() {
@@ -44,6 +38,5 @@ export default class Popup {
   
     setEventListeners() {
       this._popup.addEventListener('click', this._handleOverlayClose.bind(this));
-  this._popup.addEventListener('click', this._handleButtonkClose.bind(this))
     }
   }

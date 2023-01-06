@@ -26,7 +26,7 @@ import {
   initialCards,
   components,
   formValidators,
-} from "../components/constants.js";
+} from "../utils/constants.js";
 
 
 const runValidation = (components) => {
