@@ -34,6 +34,7 @@ export default class Popup {
       document.removeEventListener('keydown', this._handleEscClose);
     }
   
+   
     // Публичный метод для добавления обработчиков событий для попапа
   
     setEventListeners() {
